@@ -1,17 +1,28 @@
 import './Calculator.css';
 import { Component } from 'react';
+import {CalculatorEngine} from '../../models/calculator';
 
 class Calculator extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.calculatorEngine = new CalculatorEngine();
+  }
+
   state = {
-    display: ''
+    display: '',
   };
 
   handleClick = (value) => {
-    let result = this.state.display + value;
-    this.setState({ display: result });
+    if(typeof value === 'number') {
+      this.setState({
+        display: this.calculatorEngine.handleNumber(value)
+      });
+    }else if(typeof value === 'string') {
+      this.setState({
+        display: this.calculatorEngine.handleSymbol(value)
+      });
+    }
+
   }
 
   render() {
@@ -22,7 +33,7 @@ class Calculator extends Component {
             <td colSpan="3"> <input className="display-box" type="text" id="result" value={this.state.display} disabled /> </td>
           </tr>
           <tr>
-            <td> <input className="button" type="button" value="1" onClick={() => { this.handleClick(1) }} /> </td>
+            <td> <input className="button" type="button" value="1" onClick={() => { this.handleClick(1) }}/> </td>
             <td> <input className="button" type="button" value="2" onClick={() => { this.handleClick(2) }} /> </td>
             <td> <input className="button" type="button" value="3" onClick={() => { this.handleClick(3) }} /> </td>
             <td> <input className="button" type="button" value="/" onClick={() => { this.handleClick('/') }} /> </td>
