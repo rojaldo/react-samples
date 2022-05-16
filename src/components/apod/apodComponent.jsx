@@ -24,7 +24,7 @@ class ApodComponent extends Component {
             <div class="container">
                 <div class="jumbotron">
                     <h1 class="display-4">{this.state.apod.title}</h1>
-                    <p class="lead mt-5">{this.state.apod.date}</p>
+                    <p class="lead">{this.state.apod.date}</p>
                     <div class="d-flex">
                     <img class="m-auto" src={this.state.apod.url} alt={this.state.apod.title} />    
                     </div>
