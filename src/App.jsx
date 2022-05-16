@@ -1,6 +1,7 @@
 import { Component } from "react";
 import './App.css';
-import Calculator from "./components/calculator/Calculator";
+import Calculator from "./components/calculator/calculator";
+import HeroesComponent from "./components/heroes/heroes";
 import { Tabs } from "react-bootstrap";
 import { Tab } from "react-bootstrap";
 
@@ -17,7 +18,7 @@ class App extends Component {
                     <Calculator></Calculator>
                 </Tab>
                 <Tab eventKey="profile" title="Heroes">
-                    Heroes
+                    <HeroesComponent></HeroesComponent>
                 </Tab>
             </Tabs>
         );
