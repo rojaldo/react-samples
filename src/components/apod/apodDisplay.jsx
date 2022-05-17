@@ -6,7 +6,7 @@ class ApodDisplay extends Component {
      } 
 
     getApod = () => {
-        let url = 'https://api.nasa.gov/planetary/apod?api_key=tqz634Z1x0LiJzjbhSyUoExrZaGKLM0MG1VnROR6';
+        let url = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY';
         if(this.props.dateStr !== '' || this.props.dateStr !== undefined) {
             url = url + '&date=' + this.props.dateStr;
         }
