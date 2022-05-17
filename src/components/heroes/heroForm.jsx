@@ -34,11 +34,11 @@ class HeroForm extends Component {
             <>
                 <div className="form-group">
                     <label>Hero Name</label>
-                    <input type="text" className="form-control" name="name" id="" aria-describedby="helpId" placeholder="" value={this.state.newHero.name} onChange={(event) => this.change(event)} />
+                    <input type="text" className="form-control" name="name" aria-describedby="helpId" placeholder="" value={this.state.newHero.name} onChange={(event) => this.change(event)} />
                 </div>
                 <div className="form-group">
                     <label>Hero Alter Ego</label>
-                    <input type="text" className="form-control" name="alterEgo" id="" aria-describedby="helpId" placeholder="" value={this.state.newHero.alterEgo} onChange={(event) => this.change(event)} />
+                    <input type="text" className="form-control" name="alterEgo" aria-describedby="helpId" placeholder="" value={this.state.newHero.alterEgo} onChange={(event) => this.change(event)} />
                 </div>
                 {myButton}
             </>
