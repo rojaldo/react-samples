@@ -3,7 +3,7 @@ const FIRSTFIGURE = 1;
 const SECONDFIGURE = 2;
 const RESULT = 3;
 
-export class CalculatorEngine {
+export default class CalculatorEngine {
 
     currentState = INIT;
     operator = '';

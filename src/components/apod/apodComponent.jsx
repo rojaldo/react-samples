@@ -7,7 +7,7 @@ class ApodComponent extends Component {
     }
 
     getApod = () => {
-        fetch('https://api.nasa.gov/planetary/apod?api_key=tqz634Z1x0LiJzjbhSyUoExrZaGKLM0MG1VnROR6')
+        fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
             .then(response => response.json())
             .then(data => {
                 this.setState({

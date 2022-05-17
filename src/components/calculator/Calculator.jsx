@@ -1,6 +1,6 @@
 import './Calculator.css';
 import { Component } from 'react';
-import {CalculatorEngine} from '../../models/calculator';
+import CalculatorEngine from '../../models/calculator';
 import Display from './display';
 import Keyboard from './keyboard';
 
