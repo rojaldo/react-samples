@@ -5,28 +5,27 @@ function ApodDisplay({dateStr}) {
     const [apod, setApod] = useState(undefined)
     const [fetching, setFetching] = useState(false)
 
-
-    useEffect(()=>{
+    const getApod =(dateStr)=>{ 
         console.log(dateStr + fetching);
-        setFetching(true)
-        let url = 'https://api.nasa.gov/planetary/apod?api_key=tqz634Z1x0LiJzjbhSyUoExrZaGKLM0MG1VnROR6';
-        if(dateStr !== '' || dateStr !== undefined) {
-            url = url + '&date=' + dateStr;
-        }
-        
-        if(fetching === false){
+    setFetching(true)
+    let url = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY';
+    if(dateStr !== '' || dateStr !== undefined) {
+        url = url + '&date=' + dateStr;
+    }
+    if(fetching === false){
 
-            console.log(url);
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                setApod(data)
-                setFetching(false)
-            });
+        console.log(url);
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            setApod(data)
+            setFetching(false)
+        });
 
-        }
-    },[dateStr])
-
+    }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(()=>{getApod()},[dateStr])
 
     let body = <h1>Loading...</h1>
     if(apod !== undefined) {
