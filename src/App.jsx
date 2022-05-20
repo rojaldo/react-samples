@@ -15,7 +15,7 @@ class App extends Component {
     render() {
         return (
             <>
-                <h1>React Router v6 (Nested Routing)</h1>
+                <h1>React Samples</h1>
 
                 <nav>
                     <Link to="/calculator">Calculator</Link>{' | '}
