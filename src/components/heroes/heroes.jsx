@@ -8,6 +8,10 @@ class HeroesComponent extends Component {
         heroes: [new Hero('Batman', 'Bruce Wayne'), new Hero('Superman', "Clark Kent"), new Hero('Spiderman', "Peter Parker")],
     }
 
+    componentWillUnmount() {
+        console.log('HeroesComponent will unmount');
+    }   
+
     addHero = (hero) => {
         this.setState({
             heroes: [...this.state.heroes, hero],

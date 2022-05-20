@@ -1,19 +1,33 @@
 import { useState, useEffect } from "react";
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import ListBeers from "./listBeers";
+import SliderBeers from "./sliderBeers";
 
 function BeersFunctionalComponent() {
 
-    const [beers, setBeers] = useState([])
+    const [beers, setBeers] = useState([]);
+    const [filteredBeers, setFilteredBeers] = useState([]);
     const [value, setValue] = useState([0, 6]);
     const [range, setRange] = useState([0, 30]);
+    const [status, setStatus] = useState('idle');
 
     const getBeers = () => {
+        if (status !== 'idle') return;
+        setStatus('fetching');
         let url = 'https://api.punkapi.com/v2/beers';
+        console.log(url);
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 setBeers(data);
+                setFilteredBeers(
+                    data
+                    .filter((beer) => {
+                        return beer.abv >= value[0] && beer.abv <= value[1];
+                    })
+                    .sort((a, b) => {
+                        return a.abv - b.abv;
+                    })
+                );
                 let max = 0;
                 data.forEach(beer => {
                     if (beer.abv > max) {
@@ -21,51 +35,34 @@ function BeersFunctionalComponent() {
                     }
                 });
                 setRange([0, max]);
+                setStatus('fetched');
             });
+    }
+
+    const filterBeers = (myBeers = []) => {
+        if (myBeers.length === 0) myBeers = beers;
+        setFilteredBeers(myBeers
+            .filter(beer => {
+                return beer.abv >= value[0] && beer.abv <= value[1];
+            })
+            .sort((a, b) => {
+                return a.abv - b.abv;
+            })
+        );
     }
 
     useEffect(getBeers, []);
 
-    let cards = beers
-        .filter((beer) => {
-            return beer.abv >= value[0] && beer.abv <= value[1];
-        })
-        .sort((a, b) => {
-            return a.abv - b.abv;
-        })
-        .map((beer, index) => {
-            return (
-                <div className="col-sm-12 col-md-6 col-lg-4 mb-4" key={index}>
-                    <div className="card h-100">
-                        <img className="card-img-top mx-auto mt-2" src={beer.image_url} alt="" style={{ width: '60px' }} />
-                        <div className="card-body">
-                            <h4 className="card-title">{beer.name}</h4>
-                            <p className="card-text">{beer.tagline}</p>
-                            <p className="card-text">{beer.abv}%</p>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-        );
-
-    const handleChange = (event, newValue) => {
+    const updateValue = (newValue) => {
         setValue(newValue);
-    };
+        filterBeers();
+    }
+
     return (
         <div className="container">
-            <Box class="w-100">
-                <Slider
-                    getAriaLabel={() => 'Temperature range'}
-                    value={value}
-                    onChange={handleChange}
-                    valueLabelDisplay="auto"
-                    max={range[1]}
-                />
-            </Box>
-            <div className="row">
-                {cards}
-            </div>
+
+            <SliderBeers range={range} onChangeValue={(value) => { updateValue(value) }}></SliderBeers>
+            <ListBeers beers={filteredBeers}></ListBeers>
 
         </div>
     );
