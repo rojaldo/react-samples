@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { AppContext } from "../../App";
+
 function ApodPicker(props) {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const context = useContext(AppContext);
+    const [selectedDate, setSelectedDate] = useState(context.apod.date);
     const updateDate = (date) => {
         // get the date in the format YYYY-MM-DD
+        context.apod.setDate(date);
         const dateString = moment(date).format('YYYY-MM-DD');
         setSelectedDate(date)
         props.onDateChange(dateString);

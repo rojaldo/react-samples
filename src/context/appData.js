@@ -8,6 +8,16 @@ export const appData = {
         setBeers: (newBeers) => {
             appData.beers.beers = newBeers;
         }
+    },
+    apod: {
+        date: new Date(),
+        info: {},
+        setInfo: (newInfo) => {
+            appData.apod.info = newInfo;
+        },
+        setDate: (newDate) => {
+            appData.apod.date = newDate;
+        }
     }
 }
 

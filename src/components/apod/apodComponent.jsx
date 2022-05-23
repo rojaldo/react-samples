@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ApodDisplay from "./apodDisplay";
 import ApodPicker from "./apodPicker";
+import moment from "moment";
+import { AppContext } from "../../App";
 
 function ApodComponent() {
-    const [date, setDate] = useState('');
+    const context = useContext(AppContext);
+    const [date, setDate] = useState(moment(context.apod.date).format("YYYY-MM-DD"));
     const updateDate = (dateStr) => {
         console.log('dateStr*: ' + dateStr);
         setDate(dateStr);
