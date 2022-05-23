@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ListBeers from "./listBeers";
 import SliderBeers from "./sliderBeers";
+import { AppContext } from "../../App";
 
 function BeersFunctionalComponent() {
 
-    const [beers, setBeers] = useState([]);
+    const context = useContext(AppContext);
+    const [beers, setBeers] = useState(context.beers.beers);
     const [filteredBeers, setFilteredBeers] = useState([]);
-    const [value, setValue] = useState([0, 6]);
+    const [value, setValue] = useState(context.beers.range);
     const [range, setRange] = useState([0, 30]);
     const [status, setStatus] = useState('idle');
 
     const getBeers = () => {
-        if (status !== 'idle') return;
+        if (status !== 'idle' || context.beers.beers.length > 0) return;
         setStatus('fetching');
         let url = 'https://api.punkapi.com/v2/beers';
         console.log(url);
@@ -19,6 +21,7 @@ function BeersFunctionalComponent() {
             .then(response => response.json())
             .then(data => {
                 setBeers(data);
+                context.beers.setBeers(data);
                 setFilteredBeers(
                     data
                     .filter((beer) => {

@@ -1,11 +1,14 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../../App';
 
 function SliderBeers({range, onChangeValue}) {
-    const [value, setValue] = useState([0,6])
+    const context = useContext(AppContext);
+    const [value, setValue] = useState(context.beers.range)
 
     const handleChange = (event, newValue) => {
+        context.beers.setRange(value);
         setValue(newValue);
     };
 

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Calculator from "./components/calculator/calculator";
 import HeroesComponent from "./components/heroes/heroes";
 import ApodComponent from "./components/apod/apodComponent";
@@ -9,12 +9,16 @@ import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import {appData} from './context/appData';
+
+export const AppContext = React.createContext();
+
 class App extends Component {
 
     state = {}
     render() {
         return (
-            <>
+            <AppContext.Provider value={appData}>
                 <h1>React Samples</h1>
 
                 <nav>
@@ -34,23 +38,7 @@ class App extends Component {
                         <Route path="*" element={<NoMatch />} />
                     </Route>
                 </Routes>
-            </>
-
-            // <Tabs defaultActiveKey="beers" id="uncontrolled-tab-example" className="mb-3">
-            //     <Tab eventKey="calculator" title="Calculator">
-            //         <Calculator></Calculator>
-            //     </Tab>
-            //     <Tab eventKey="heroes" title="Heroes">
-            //         <HeroesComponent></HeroesComponent>
-            //     </Tab> 
-            //     <Tab eventKey="apod" title="Apod">
-            //         <ApodComponent></ApodComponent>
-            //     </Tab>
-            //     <Tab eventKey="beers" title="Beers">
-            //         <BeersFunctionalComponent></BeersFunctionalComponent>
-            //     </Tab>
-
-            // </Tabs>
+            </AppContext.Provider >
         );
     }
 }
