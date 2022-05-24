@@ -63,6 +63,7 @@ function BeersFunctionalComponent() {
 
     return (
         <div className="container">
+            <h1>My Beers</h1>
 
             <SliderBeers range={range} onChangeValue={(value) => { updateValue(value) }}></SliderBeers>
             <ListBeers beers={filteredBeers}></ListBeers>
